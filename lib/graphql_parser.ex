@@ -1,0 +1,2 @@
+defmodule GraphqlParser do
+end
