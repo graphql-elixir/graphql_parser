@@ -8,7 +8,11 @@ defmodule GraphqlParser.Nif do
 
   @doc false
   def init do
-    path = "path to dynamically compiled module" #TODO
+    path = Path.expand "graphqlparser" #TODO
     :ok = :erlang.load_nif(path, 1)
+  end
+
+  def parse(_) do
+    exit(:nif_library_not_loaded)
   end
 end
