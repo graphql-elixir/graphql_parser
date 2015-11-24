@@ -37,7 +37,7 @@ static ERL_NIF_TERM parse_nif(ErlNifEnv *env, int argc, const ERL_NIF_TERM argv[
     error_len = strlen(error);
     enif_alloc_binary(error_len, &output_binary);
     strncpy((char*)output_binary.data, error, error_len);
-    return enif_make_binary(env, &output_binary);
+    return enif_make_tuple2(env, enif_make_atom(env, "error"), enif_make_binary(env, &output_binary));
   }
 
   json = graphql_ast_to_json(ast);
@@ -45,7 +45,7 @@ static ERL_NIF_TERM parse_nif(ErlNifEnv *env, int argc, const ERL_NIF_TERM argv[
   json_len = strlen(json);
   enif_alloc_binary(json_len, &output_binary);
   strncpy((char*)output_binary.data, json, json_len);
-  return enif_make_binary(env, &output_binary);
+  return enif_make_tuple2(env, enif_make_atom(env, "ok"), enif_make_binary(env, &output_binary));
 }
 
 static ErlNifFunc nif_funcs[] =
