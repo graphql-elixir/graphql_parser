@@ -12,27 +12,40 @@
 
 static ERL_NIF_TERM parse_nif(ErlNifEnv *env, int argc, const ERL_NIF_TERM argv[])
 {
-  ErlNifBinary inp_bin;
-  ErlNifBinary out_bin;
-  const char *error;
-  struct GraphQLAstNode *n;
-  const char *json;
-  int json_len;
+  ErlNifBinary graphql_binary;
+  ErlNifBinary output_binary;
 
-  if(!enif_inspect_binary(env, argv[0], &inp_bin)){
+  struct GraphQLAstNode *ast;
+  const char *error;
+  size_t error_len;
+
+  const char *json;
+  size_t json_len;
+
+  if (argc != 1) {
     return enif_make_badarg(env);
   }
 
-  n = graphql_parse_string((const char *)inp_bin.data, &error);
-  json = graphql_ast_to_json(n);
+  if(!enif_inspect_binary(env, argv[0], &graphql_binary)){
+    return enif_make_badarg(env);
+  }
+
+  ast = graphql_parse_string((const char *)graphql_binary.data, &error);
+  enif_release_binary(&graphql_binary);
+
+  if (ast == NULL) {
+    error_len = strlen(error);
+    enif_alloc_binary(error_len, &output_binary);
+    strncpy((char*)output_binary.data, error, error_len);
+    return enif_make_binary(env, &output_binary);
+  }
+
+  json = graphql_ast_to_json(ast);
+
   json_len = strlen(json);
-
-  enif_release_binary(&inp_bin);
-
-  enif_alloc_binary(json_len, &out_bin);
-  strncpy((char*)out_bin.data, json, json_len);
-
-  return enif_make_binary(env, &out_bin);
+  enif_alloc_binary(json_len, &output_binary);
+  strncpy((char*)output_binary.data, json, json_len);
+  return enif_make_binary(env, &output_binary);
 }
 
 static ErlNifFunc nif_funcs[] =
