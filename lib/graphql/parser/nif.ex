@@ -1,9 +1,10 @@
-defmodule GraphqlParser.Nif do
+defmodule GraphQL.Parser.Nif do
   @on_load {:init, 0}
-  @moduledoc """
-    NIF Module wrapping the libgraphqlparser.
 
-    Do not use this module directly. Use GraphqlParser module instead.
+  @moduledoc """
+    NIF Module wrapping libgraphqlparser.
+
+    Do not use this module directly. Use GraphQL.Parser module instead.
   """
 
   @doc false

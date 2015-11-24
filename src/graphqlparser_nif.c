@@ -40,4 +40,4 @@ static ErlNifFunc nif_funcs[] =
   {"parse", 1, parse_nif}
 };
 
-ERL_NIF_INIT(Elixir.GraphqlParser.Nif, nif_funcs, NULL, NULL, NULL, NULL)
+ERL_NIF_INIT(Elixir.GraphQL.Parser.Nif, nif_funcs, NULL, NULL, NULL, NULL)

@@ -1,4 +1,4 @@
-defmodule GraphqlParser.Mixfile do
+defmodule GraphQL.Parser.Mixfile do
   use Mix.Project
 
   def project do
