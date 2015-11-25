@@ -1,5 +1,5 @@
 defmodule GraphQL.ParserTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   # doctest GraphQL.Parser
 
   import ExUnit.TestHelper
