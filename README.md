@@ -51,7 +51,7 @@ iex> GraphQL.Parser.parse! " hello }"
 ## ToDo
 
 - [x] PoC
-- [ ] Bring all build processes under Mix
+- [WIP] Bring all build processes under Mix
 - [ ] Bind the entire AST
 - [ ] Add tests
 
@@ -61,10 +61,9 @@ I just wrote this binding quickly as a PoC and as a result, its pretty limited.
 Currently, the library binds only the AST to JSON output and not the entire AST
 itself. This limitation will be resolved soon.
 
-Yet to add the build processes (figuring out a good way to do it). So
-basically, you have to manually build out everything to run, for now :sweat:
-First, build and install libgraphqlparser (`cmake .`, `make`, `make install`),
-and then compile the NIF library from project's root like: (I'm on OS X)
+Yet to bring all the build processes under Mix (It's a WIP).
+For now, you have to manually compile the NIF library from project's root
+like: (I'm on OS X)
 
 ```sh
 $ gcc -undefined dynamic_lookup -dynamiclib -I /usr/local/include/graphqlparser/ -I /usr/local/Cellar/erlang/18.1/lib/erlang/usr/include/ -L /usr/local/lib/ -lgraphqlparser src/graphqlparser_nif.c -o graphqlparser.so
