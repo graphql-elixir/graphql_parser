@@ -53,7 +53,7 @@ iex> GraphQL.Parser.parse! " hello }"
 - [x] PoC
 - [WIP] Bring all build processes under Mix
 - [ ] Bind the entire AST
-- [ ] Add tests
+- [x] Add tests
 
 ## Caveats
 
