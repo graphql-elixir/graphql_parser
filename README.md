@@ -69,6 +69,9 @@ like: (I'm on OS X)
 $ gcc -undefined dynamic_lookup -dynamiclib -I /usr/local/include/graphqlparser/ -I /usr/local/Cellar/erlang/18.1/lib/erlang/usr/include/ -L /usr/local/lib/ -lgraphqlparser src/graphqlparser_nif.c -o graphqlparser.so
 ```
 
+or checkout [osx-build](https://github.com/aarvay/graphql_parser/tree/osx-build)
+branch.
+
 ## License
 
 Copyright (c) 2015 Vignesh Rajagopalan
