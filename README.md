@@ -3,6 +3,9 @@
 An Elixir binding for [libgraphqlparser](https://github.com/graphql/libgraphqlparser)
 for parsing [GraphQL](http://graphql.org).
 
+**Unstable** - Currently the library is unstable because of a pressing
+[issue](/../../issues/1).
+
 ## Installation
 
 Add GraphQL.Parser to your deps in `mix.exs`:
