@@ -1,6 +1,6 @@
 defmodule GraphQL.Parser do
   def parse(graphql) do
-    result = GraphQL.Parser.Nif.parse graphql
+    result = GraphQL.Parser.Nif.parse(graphql <> "\0")
 
     case result do
       {:ok, json} ->
