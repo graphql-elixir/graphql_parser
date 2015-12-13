@@ -1,11 +1,31 @@
 # GraphQL.Parser
 
 An Elixir binding for [libgraphqlparser](https://github.com/graphql/libgraphqlparser)
-for parsing [GraphQL](http://graphql.org).
+implemented as a NIF for parsing [GraphQL](http://graphql.org).
+
+## Introduction
+
+GraphQL is a query language designed to build client applications by providing
+an intuitive and flexible syntax and system for describing their data requirements
+and interactions.
+
+This library is an Elixir interface for the query language parser and not a full
+implementation of GraphQL. It takes a query string as input and outputs the AST
+in a format suitable for performing pattern matching. Use this library directly
+only if you want to write your own implementation of GraphQL or you want to work
+with AST for something else. For the full Elixir implementation, checkout
+[graphql-elixir](https://github.com/joshprice/graphql-elixir). Head
+[here](https://facebook.github.io/graphql) if you are looking out for the full
+GraphQL specification.
+
+## Requirements
+
+A C++ compiler that supports C++11, cmake, and make, for building and installing
+libgraphqlparser. It also requires Mac OS X or Linux.
 
 ## Installation
 
-Add GraphQL.Parser to your deps in `mix.exs`:
+To get started quickly, add GraphQL.Parser to your deps in `mix.exs`:
 
 ```elixir
 defp deps do
@@ -13,13 +33,21 @@ defp deps do
 end
 ```
 
-Then, update your deps:
+then, update your deps:
 
 ```sh
 $ mix deps.get
 ```
 
-## Usage
+To unify the build process, the multiple steps involved in building
+graphql_parser, have been implemented under Mix. So a `mix compile` would
+trigger building and installing of libgraphqlparser and then this library itself.
+This has not been tested under various environments. If you're not able to run
+`mix compile` successfully, please create an issue mentioning the environment
+you tried building against. *I run on OS X 10.11.1 along with GNU Make 3.81,
+CMake 3.4.0.*
+
+## Examples
 
 ```elixir
 iex> GraphQL.Parser.parse "{ hello }"
@@ -47,13 +75,6 @@ iex> GraphQL.Parser.parse! " hello }"
 ** (GraphQL.Parser.SyntaxError) 1.2-6: syntax error, unexpected IDENTIFIER, expecting fragment or mutation or query or { on line
     lib/graphql/parser.ex:20: GraphQL.Parser.parse!/1
 ```
-
-## ToDo
-
-- [x] PoC
-- [x] Bring all build processes under Mix
-- [ ] Bind the entire AST
-- [x] Add tests
 
 ## License
 
