@@ -37,7 +37,7 @@ defmodule GraphQL.Parser.Mixfile do
   defp package do
     [maintainers: ["Vignesh Rajagopalan"],
      licenses: ["MIT"],
-     links: %{"GitHub" => "https://github/aarvay/graphql_parser"},
+     links: %{"GitHub" => "https://github.com/aarvay/graphql_parser"},
      files: ["lib", "src", "Makefile", "mix.exs", "README.md",
              "libgraphqlparser/ast/ast.ast", "libgraphqlparser/ast/*.py",
              "libgraphqlparser/c/*.cpp", "libgraphqlparser/c/*.h",
