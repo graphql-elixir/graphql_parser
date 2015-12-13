@@ -5,7 +5,7 @@ defmodule GraphQL.Parser.Mixfile do
     [app: :graphql_parser,
      version: "0.0.1",
      elixir: "~> 1.1",
-     compilers: [:libgraphqlparser, :elixir, :app],
+     compilers: [:libgraphqlparser, :nif] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
@@ -59,5 +59,15 @@ defmodule Mix.Tasks.Compile.Libgraphqlparser do
     end
 
     IO.binwrite res # verbose
+  end
+end
+
+defmodule Mix.Tasks.Compile.Nif do
+  use Mix.Task
+
+  @shortdoc "Compiles the NIF library"
+
+  def run(_) do
+    {_result, 0} = System.cmd("make", [], stderr_to_stdout: true) 
   end
 end

@@ -9,7 +9,7 @@ defmodule GraphQL.Parser.Nif do
 
   @doc false
   def init do
-    path = Path.expand "graphqlparser" #TODO
+    path = Path.expand "graphql_parser"
     :ok = :erlang.load_nif(path, 1)
   end
 
