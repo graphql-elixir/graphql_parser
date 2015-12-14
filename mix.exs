@@ -77,6 +77,9 @@ defmodule Mix.Tasks.Compile.Libgraphqlparser do
   def run(_) do
 
     try do
+      File.mkdir_p!("libgraphqlparser/python")
+      File.touch!("libgraphqlparser/python/CMakeLists.txt")
+
       System.cmd("cmake", ["."], cd: "libgraphqlparser", stderr_to_stdout: true)
         |> check_exit_status
 
@@ -108,6 +111,7 @@ defmodule Mix.Tasks.Compile.Nif do
 
   def run(_) do
     try do
+      File.mkdir_p!("priv")
       System.cmd("make", [], stderr_to_stdout: true) |> check_exit_status
     rescue
       e in Mix.Error ->
