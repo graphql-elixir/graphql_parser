@@ -29,7 +29,7 @@ To get started quickly, add GraphQL.Parser to your deps in `mix.exs`:
 
 ```elixir
 defp deps do
-  [{:graphql_parser, "~> 0.0.1"}]
+  [{:graphql_parser, "~> 0.0.2"}]
 end
 ```
 
