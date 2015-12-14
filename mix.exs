@@ -124,5 +124,7 @@ defmodule Mix.Tasks.Compile.Nif do
             """
         end
     end
+
+    Mix.Project.build_structure
   end
 end
