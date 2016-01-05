@@ -7,7 +7,7 @@ defmodule GraphQL.Parser.Mixfile do
     [app: :graphql_parser,
      name: "GraphQL.Parser",
      version: @version,
-     elixir: "~> 1.1",
+     elixir: "~> 1.2",
      compilers: [:libgraphqlparser, :nif] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
