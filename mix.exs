@@ -8,7 +8,7 @@ defmodule GraphQL.Parser.Mixfile do
      name: "GraphQL.Parser",
      version: @version,
      elixir: "~> 1.2",
-     compilers: [:libgraphqlparser, :nif] ++ Mix.compilers,
+     compilers: [:nif] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      description: description,
@@ -65,41 +65,6 @@ defmodule GraphQL.Parser.MixHelper do
     end
 
     IO.binwrite res # verbose
-  end
-end
-
-defmodule Mix.Tasks.Compile.Libgraphqlparser do
-  use Mix.Task
-  import GraphQL.Parser.MixHelper
-
-  @shortdoc "Compiles libgraphqlparser"
-
-  def run(_) do
-
-    try do
-      File.mkdir_p!("libgraphqlparser/python")
-      File.touch!("libgraphqlparser/python/CMakeLists.txt")
-
-      System.cmd("cmake", ["."], cd: "libgraphqlparser", stderr_to_stdout: true)
-        |> check_exit_status
-
-      System.cmd("make", [], cd: "libgraphqlparser", stderr_to_stdout: true)
-        |> check_exit_status
-
-      System.cmd("make", ["install"], cd: "libgraphqlparser", stderr_to_stdout: true)
-        |> check_exit_status
-
-    rescue
-      e in Mix.Error ->
-        raise e
-      e in ErlangError ->
-        case e.original do
-          :enoent ->
-            raise Mix.Error, message: """
-              Please check if `cmake` and `make` are installed
-            """
-        end
-    end
   end
 end
 
