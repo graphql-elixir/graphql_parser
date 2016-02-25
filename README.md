@@ -39,13 +39,22 @@ then, update your deps:
 $ mix deps.get
 ```
 
-To unify the build process, the multiple steps involved in building
-graphql_parser, have been implemented under Mix. So a `mix compile` would
-trigger building and installing of libgraphqlparser and then this library itself.
-This has not been tested under various environments. If you're not able to run
-`mix compile` successfully, please create an issue mentioning the environment
-you tried building against. *I run on OS X 10.11.1 along with GNU Make 3.81,
-CMake 3.4.0.*
+### Installing libgraphqlparser
+You need to install libgraphqlparser before attemting to compile & run this
+library. If you're on a mac, you could do `brew install libgraphqlparser`.
+
+But I'd recommend building and installing from source, because the library is
+constantly updated with critical bug fixes. It's in pretty early stages, so
+this is the most recommended approach. To install from source :
+
+```sh
+$ cd libgraphqlparser/
+$ cmake .
+$ make
+$ make install
+```
+
+Once libgraphqlparser is successfully installed, do a `mix compile` to compile the NIF and you're good to go!
 
 ## Examples
 
