@@ -22,7 +22,7 @@ defmodule GraphQL.Parser.Mixfile do
   end
 
   defp deps do
-    [{:poison, "~> 1.5"},
+    [{:poison, "~> 2.0"},
      {:earmark, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.11", only: :dev}]
   end
