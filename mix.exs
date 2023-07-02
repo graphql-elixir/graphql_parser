@@ -4,17 +4,19 @@ defmodule GraphQL.Parser.Mixfile do
   @version "0.0.4"
 
   def project do
-    [app: :graphql_parser,
-     name: "GraphQL.Parser",
-     version: @version,
-     elixir: "~> 1.2",
-     compilers: [:nif] ++ Mix.compilers,
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     description: description,
-     package: package,
-     docs: docs,
-     deps: deps]
+    [
+      app: :graphql_parser,
+      name: "GraphQL.Parser",
+      version: @version,
+      elixir: "~> 1.2",
+      compilers: [:nif] ++ Mix.compilers(),
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      description: description(),
+      package: package(),
+      docs: docs(),
+      deps: deps()
+    ]
   end
 
   def application do
@@ -22,9 +24,7 @@ defmodule GraphQL.Parser.Mixfile do
   end
 
   defp deps do
-    [{:poison, "~> 2.0"},
-     {:earmark, "~> 0.1", only: :dev},
-     {:ex_doc, "~> 0.11", only: :dev}]
+    [{:poison, "~> 2.0"}, {:earmark, "~> 0.1", only: :dev}, {:ex_doc, "~> 0.11", only: :dev}]
   end
 
   defp description do
@@ -35,36 +35,51 @@ defmodule GraphQL.Parser.Mixfile do
   end
 
   defp package do
-    [maintainers: ["Vignesh Rajagopalan"],
-     licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/aarvay/graphql_parser"},
-     files: ["lib", "src", "Makefile", "mix.exs", "README.md",
-             "libgraphqlparser/ast/ast.ast", "libgraphqlparser/ast/*.py",
-             "libgraphqlparser/c/*.cpp", "libgraphqlparser/c/*.h",
-             "libgraphqlparser/*.h", "libgraphqlparser/*.cpp",
-             "libgraphqlparser/*.lpp", "libgraphqlparser/*.hh",
-             "libgraphqlparser/*.hpp", "libgraphqlparser/*.ypp",
-             "libgraphqlparser/CMakeLists.txt", "libgraphqlparser/LICENSE",
-             "libgraphqlparser/PATENTS", "libgraphqlparser/README.md"]]
+    [
+      maintainers: ["Vignesh Rajagopalan"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/aarvay/graphql_parser"},
+      files: [
+        "lib",
+        "src",
+        "Makefile",
+        "mix.exs",
+        "README.md",
+        "libgraphqlparser/ast/ast.ast",
+        "libgraphqlparser/ast/*.py",
+        "libgraphqlparser/c/*.cpp",
+        "libgraphqlparser/c/*.h",
+        "libgraphqlparser/*.h",
+        "libgraphqlparser/*.cpp",
+        "libgraphqlparser/*.lpp",
+        "libgraphqlparser/*.hh",
+        "libgraphqlparser/*.hpp",
+        "libgraphqlparser/*.ypp",
+        "libgraphqlparser/CMakeLists.txt",
+        "libgraphqlparser/LICENSE",
+        "libgraphqlparser/PATENTS",
+        "libgraphqlparser/README.md"
+      ]
+    ]
   end
 
   defp docs do
-    [source_ref: "v#{@version}",
-     extras: ["README.md"],
-     main: "README"]
+    [source_ref: "v#{@version}", extras: ["README.md"], main: "README"]
   end
 end
 
 defmodule GraphQL.Parser.MixHelper do
   def check_exit_status({res, exit_status_code}) do
     if exit_status_code != 0 do
-      raise Mix.Error, message: """
-        Build command exited with status code: #{exit_status_code}.
-        Make sure you're running `mix compile` from project's root.
-      """
+      raise Mix.Error,
+        message: """
+          Build command exited with status code: #{exit_status_code}.
+          Make sure you're running `mix compile` from project's root.
+        """
     end
 
-    IO.binwrite res # verbose
+    # verbose
+    IO.binwrite(res)
   end
 end
 
@@ -81,15 +96,17 @@ defmodule Mix.Tasks.Compile.Nif do
     rescue
       e in Mix.Error ->
         raise e
+
       e in ErlangError ->
         case e.original do
           :enoent ->
-            raise Mix.Error, message: """
-              Please check if `cmake` and `make` are installed
-            """
+            raise Mix.Error,
+              message: """
+                Please check if `cmake` and `make` are installed
+              """
         end
     end
 
-    Mix.Project.build_structure
+    Mix.Project.build_structure()
   end
 end
