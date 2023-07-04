@@ -1,3 +1,5 @@
-%{"earmark": {:hex, :earmark, "0.1.19"},
-  "ex_doc": {:hex, :ex_doc, "0.11.1"},
-  "poison": {:hex, :poison, "1.5.0"}}
+%{
+  "earmark": {:hex, :earmark, "0.1.19", "ffec54f520a11b711532c23d8a52b75a74c09697062d10613fa2dbdf8a9db36e", [:mix], [], "hexpm", "db85f989ba3030d40d3a901d7eebbf926ee07355bf6113d730b8aaf9404a6bd7"},
+  "ex_doc": {:hex, :ex_doc, "0.11.1", "43a16e4168e384213a052e6ee77723b765165b866ac52a10394dfa8f7de5b203", [:mix], [{:earmark, "~> 0.1.17 or ~> 0.2", [hex: :earmark, repo: "hexpm", optional: true]}], "hexpm", "d9da03da5792939081ce8bc9753136a98978ec1f23b2ff364395fd4cd50e674f"},
+  "poison": {:hex, :poison, "2.2.0", "4763b69a8a77bd77d26f477d196428b741261a761257ff1cf92753a0d4d24a63", [:mix], [], "hexpm", "519bc209e4433961284174c497c8524c001e285b79bdf80212b47a1f898084cc"},
+}

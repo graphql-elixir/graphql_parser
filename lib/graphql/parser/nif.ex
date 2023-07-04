@@ -20,12 +20,13 @@ defmodule GraphQL.Parser.Nif do
         |> :filename.dirname
         |> :filename.dirname
         |> :filename.join('priv')
+
       path ->
         path
     end
   end
 
   def parse(_) do
-    exit(:nif_library_not_loaded)
+    :erlang.nif_error(:nif_library_not_loaded)
   end
 end
